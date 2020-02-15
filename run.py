@@ -14,7 +14,7 @@ data = [
     },
 ]
 
-loop = tqdm(total = len(data), position=0, disable=False)
+loop = tqdm(total = len(data))
 
 for datax in data:
     letsgo = LetsGoo(datax['ODP'], datax['SERVICE'], datax['PORT'])
