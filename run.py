@@ -4,7 +4,7 @@ from main import LetsGoo
 data = [
     {
         "ODP": "ODP-BLI-FF/04",
-        "SERVICE": "172405800777",
+        "SERVICE": "17240580077",
         "PORT": "5"
     },
     {
