@@ -1,10 +1,32 @@
 import time
+import json
 from tqdm import tqdm
 from main import LetsGoo
 from selenium import webdriver
 from selenium.webdriver import ChromeOptions
 from selenium.webdriver.common.keys import Keys
 
+print('''
+///////////////////////////////////////////////////////////////////////////////////
+///                                                                             ///
+///     Attention!!                                                             ///
+///     Before you use this software, Chrome Web Browser                        ///
+///     has installed on your PC.                                               ///
+///                                                                             ///
+///     How Use this Software ?                                                 ///
+///     1. Prepare the xlsx file and rename file as terserah.xlsx               ///
+///     2. Visit http://beautifytools.com/excel-to-json-converter.php           ///
+///        to convert xlsx to json, download json file and put on utils         ///
+///        directory, rename as terserah.json                                   ///
+///     3. Type python run.py                                                   ///
+///     4. Waiting until the process finish                                     ///
+///                                                                             ///
+///////////////////////////////////////////////////////////////////////////////////
+''')
+
+# convert directory code here...
+
+# automation code here ...
 path = 'utils\chromedriver.exe'
 options = ChromeOptions()
 options.add_experimental_option("debuggerAddress","127.0.0.1:9222")
@@ -22,7 +44,6 @@ data = [
         "PORT": "2"
     },
 ]
-
 
 email = input("Enter dava email: ")
 password = input("Enter dava password: ")
@@ -45,8 +66,9 @@ if len(email) != 0 and len(password) != 0:
         for datax in data:
             letsgo = LetsGoo(datax['ODP'], datax['SERVICE'], datax['PORT'], driver)
             letsgo.letsinput()
-            loop.set_description("Loading...".format(datax))
+            loop.set_description(f"Latest Service {datax['SERVICE']}".format(datax))
             loop.update(1)
+            
         loop.close()
     else:
         print("Email or Password incorrect!")
