@@ -6,7 +6,7 @@ from selenium import webdriver
 from selenium.webdriver import ChromeOptions
 from selenium.webdriver.common.keys import Keys
 
-path = r"C:\Users\gedep\Downloads\auto_createfile-master\auto_createfile-master\utils\chromedriver.exe"
+path = 'utils\chromedriver.exe'
 options = ChromeOptions()
 options.add_experimental_option("debuggerAddress","127.0.0.1:62781")
 driver = webdriver.Chrome(path,options=options)
