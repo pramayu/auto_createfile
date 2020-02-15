@@ -24,9 +24,9 @@ class LetsGoo:
         filename = f'data\RFS_UPDATESTP_{strname}.csv'
         with open(filename, 'w', newline='') as f:
             thewriter = csv.writer(f, delimiter='|')
-            thewriter.writerow(['   SERVICE_NAME','SERVICE_NUMBER','ODP_PANEL','PORT_NAME'])
+            thewriter.writerow(['SERVICE_NAME','SERVICE_NUMBER','ODP_PANEL','PORT_NAME'])
             if len(length_services) == 2:
-                thewriter.writerow([f'{splitstring2},{splitstring1}',f'{self._service}',f'{final_odp}',f'{final_odp}-{self._port}'])
+                thewriter.writerow([f'{splitstring2}, {splitstring1}',f'{self._service}',f'{final_odp}',f'{final_odp}-{self._port}'])
             elif len(length_services) == 1:
                 if self._service[0] == '3':
                     thewriter.writerow([f'{splitstring1}',f'0{self._service}',f'{final_odp}',f'{final_odp}-{self._port}'])
