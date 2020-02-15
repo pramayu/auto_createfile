@@ -2,14 +2,8 @@ import os
 import csv
 import time
 from datetime import datetime
-from selenium import webdriver
-from selenium.webdriver import ChromeOptions
 from selenium.webdriver.common.keys import Keys
 
-path = 'utils\chromedriver.exe'
-options = ChromeOptions()
-options.add_experimental_option("debuggerAddress","127.0.0.1:62781")
-driver = webdriver.Chrome(path,options=options)
 # hasil = open(r"D:\get_lurusin\utils\hasil.txt","a+")
 
 
@@ -17,10 +11,12 @@ driver = webdriver.Chrome(path,options=options)
 # main code
 
 class LetsGoo:
-    def __init__(self, _odp, _service, _port):
+    def __init__(self, _odp, _service, _port, _driver):
         self._odp = _odp
         self._port = _port
+        self._driver = _driver
         self._service = _service
+
 
     def createfile(self, length_services, splitstring1, splitstring2, final_odp):
         today = datetime.now()
@@ -41,42 +37,41 @@ class LetsGoo:
 
     def letsinput(self):
         try:
-            persen = 0
-            driver.get('https://emas.telkom.co.id/DAVA/dataValidation/validOrderCapture/omzetAccessNetwork')
-            driver.find_element_by_id("servid").clear()
+            self._driver.get('https://emas.telkom.co.id/DAVA/dataValidation/validOrderCapture/omzetAccessNetwork')
+            self._driver.find_element_by_id("servid").clear()
             if self._service[0] == '3':
-                driver.find_element_by_id("servid").send_keys(f"0{self._service}")
+                self._driver.find_element_by_id("servid").send_keys(f"0{self._service}")
             else:
-                driver.find_element_by_id("servid").send_keys(self._service)
-            driver.find_element_by_id("servid").send_keys(Keys.ENTER)
+                self._driver.find_element_by_id("servid").send_keys(self._service)
+            self._driver.find_element_by_id("servid").send_keys(Keys.ENTER)
 
             time.sleep(3)
 
-            length_services = driver.find_elements_by_name("selecteds")
+            length_services = self._driver.find_elements_by_name("selecteds")
             if len(length_services) == 2:
-                sf1 = driver.find_element_by_id("tdserviceinfo1").text
+                sf1 = self._driver.find_element_by_id("tdserviceinfo1").text
                 splitstring1 = sf1.split()[0]
-                sf2 = driver.find_element_by_id("tdserviceinfo2").text
+                sf2 = self._driver.find_element_by_id("tdserviceinfo2").text
                 splitstring2 = sf2.split()[0]
             elif len(length_services) == 1:
-                sf1 = driver.find_element_by_id("tdserviceinfo1").text
+                sf1 = self._driver.find_element_by_id("tdserviceinfo1").text
                 splitstring1 = sf1.split()[0]
                 splitstring2 = None
         
             time.sleep(1)
 
         # go to odp
-            driver.get('https://emas.telkom.co.id/DAVA/dataValidation/validOrderCapture/servicePoint')
+            self._driver.get('https://emas.telkom.co.id/DAVA/dataValidation/validOrderCapture/servicePoint')
             time.sleep(2)
-            driver.find_elements_by_id("filter")[5].click()
-            driver.find_elements_by_id("deviceLocation")[0].send_keys(self._odp)
-            driver.find_elements_by_id("deviceLocation")[0].send_keys(Keys.ENTER)
+            self._driver.find_elements_by_id("filter")[5].click()
+            self._driver.find_elements_by_id("deviceLocation")[0].send_keys(self._odp)
+            self._driver.find_elements_by_id("deviceLocation")[0].send_keys(Keys.ENTER)
             time.sleep(1)
 
-            elements = driver.find_elements_by_css_selector("td.column_number a")[0].text
-            driver.find_element_by_link_text(f"{elements}").click()
+            elements = self._driver.find_elements_by_css_selector("td.column_number a")[0].text
+            self._driver.find_element_by_link_text(f"{elements}").click()
             time.sleep(1)
-            odp_name = driver.find_elements_by_class_name("label")[3]
+            odp_name = self._driver.find_elements_by_class_name("label")[3]
             if elements == "16":
                 txt = odp_name.text
                 final_odp = txt.split('|', 1)[1]
