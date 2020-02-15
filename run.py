@@ -15,7 +15,7 @@ print('''
 ///                                                                             ///
 ///     How Use this Software ?                                                 ///
 ///     1. Prepare the xlsx file and rename file as terserah.xlsx               ///
-///     2. Visit http://beautifytools.com/excel-to-json-converter.php           ///
+///     2. Visit https://www.aconvert.com/document/xls-to-json/                 ///
 ///        to convert xlsx to json, download json file and put on utils         ///
 ///        directory, rename as terserah.json                                   ///
 ///     3. Type python run.py                                                   ///
@@ -24,26 +24,16 @@ print('''
 ///////////////////////////////////////////////////////////////////////////////////
 ''')
 
-# convert directory code here...
+# open file...
+
+with open('utils\sterserah.json','r') as data_file:
+    data = json.load(data_file)
 
 # automation code here ...
 path = 'utils\chromedriver.exe'
 options = ChromeOptions()
-options.add_experimental_option("debuggerAddress","127.0.0.1:9222")
+# options.add_experimental_option("debuggerAddress","127.0.0.1:9222")
 driver = webdriver.Chrome(path)
-
-data = [
-    {
-        "ODP": "ODP-BLI-FF/04",
-        "SERVICE": "17240580077",
-        "PORT": "5"
-    },
-    {
-        "ODP": "ODP-BLI-FR/69",
-        "SERVICE": "172405803097",
-        "PORT": "2"
-    },
-]
 
 email = input("Enter dava email: ")
 password = input("Enter dava password: ")
