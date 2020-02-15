@@ -17,12 +17,10 @@ driver = webdriver.Chrome(path,options=options)
 # main code
 
 class LetsGoo:
-    def __init__(self, _odp, _service, _port, _lengthdata, _count):
+    def __init__(self, _odp, _service, _port):
         self._odp = _odp
         self._port = _port
-        self._count = _count
         self._service = _service
-        self._lengthdata = _lengthdata
 
     def createfile(self, length_services, splitstring1, splitstring2, final_odp):
         today = datetime.now()
@@ -84,5 +82,3 @@ class LetsGoo:
         else:
             final_odp = odp_name.text
         self.createfile(length_services, splitstring1, splitstring2, final_odp)
-        persen = self._count / self._lengthdata * 100
-        print(f'Progress: {persen}%')
