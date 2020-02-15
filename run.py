@@ -3,6 +3,7 @@ from main import LetsGoo
 data = [
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         "ODP": "ODP-BLI-FF/04",
         "SERVICE": "172405800777",
         "PORT": "5"
@@ -22,6 +23,8 @@ for datax in data:
     letsgo.letsinput()
     
 =======
+=======
+>>>>>>> 52cec794f8945946f2e0b625c3a03dd51c1378dd
         "ODP": "ODP-BLI-FR/56",
         "SERVICE": "172405800712",
         "PORT": "3"
@@ -31,5 +34,9 @@ for datax in data:
 
 for datax in data:
     letsgo = LetsGoo(datax['ODP'], datax['SERVICE'], datax['PORT'])
+<<<<<<< HEAD
+    letsgo.letsinput()
+>>>>>>> 52cec794f8945946f2e0b625c3a03dd51c1378dd
+=======
     letsgo.letsinput()
 >>>>>>> 52cec794f8945946f2e0b625c3a03dd51c1378dd

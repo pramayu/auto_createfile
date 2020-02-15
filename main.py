@@ -1,22 +1,29 @@
+<<<<<<< HEAD
 import os
 import csv
 import time
 from datetime import datetime
+=======
+>>>>>>> 52cec794f8945946f2e0b625c3a03dd51c1378dd
 from selenium import webdriver
 from selenium.webdriver import ChromeOptions
 from selenium.webdriver.common.keys import Keys
 
+<<<<<<< HEAD
 path = r"C:\Users\gedep\Downloads\auto_createfile-master\auto_createfile-master\utils\chromedriver.exe"
 options = ChromeOptions()
 options.add_experimental_option("debuggerAddress","127.0.0.1:62781")
 driver = webdriver.Chrome(path,options=options)
 # hasil = open(r"D:\get_lurusin\utils\hasil.txt","a+")
+=======
+>>>>>>> 52cec794f8945946f2e0b625c3a03dd51c1378dd
 
 
 # main code
 
 class LetsGoo:
 
+<<<<<<< HEAD
     def __init__(self, _odp, _service, _port, _lengthdata, _count):
         self._odp = _odp
         self._port = _port
@@ -43,6 +50,8 @@ class LetsGoo:
 
     def letsinput(self):
         persen = 0
+=======
+>>>>>>> 52cec794f8945946f2e0b625c3a03dd51c1378dd
         driver.get('https://emas.telkom.co.id/DAVA/dataValidation/validOrderCapture/omzetAccessNetwork')
         driver.find_element_by_id("servid").clear()
         if self._service[0] == '3':
@@ -50,6 +59,7 @@ class LetsGoo:
         else:
             driver.find_element_by_id("servid").send_keys(self._service)
         driver.find_element_by_id("servid").send_keys(Keys.ENTER)
+<<<<<<< HEAD
 
         time.sleep(3)
 
@@ -66,12 +76,15 @@ class LetsGoo:
         
         time.sleep(1)
         # go to odp
+=======
+>>>>>>> 52cec794f8945946f2e0b625c3a03dd51c1378dd
         driver.get('https://emas.telkom.co.id/DAVA/dataValidation/validOrderCapture/servicePoint')
         time.sleep(2)
         driver.find_elements_by_id("filter")[5].click()
         driver.find_elements_by_id("deviceLocation")[0].send_keys(self._odp)
         driver.find_elements_by_id("deviceLocation")[0].send_keys(Keys.ENTER)
         time.sleep(1)
+<<<<<<< HEAD
         elements = driver.find_elements_by_css_selector("td.column_number a")[0].text
         driver.find_element_by_link_text(f"{elements}").click()
         time.sleep(1)
@@ -84,3 +97,5 @@ class LetsGoo:
         self.createfile(length_services, splitstring1, splitstring2, final_odp)
         persen = self._count / self._lengthdata * 100
         print(f'Progress: {persen}%')
+=======
+>>>>>>> 52cec794f8945946f2e0b625c3a03dd51c1378dd
