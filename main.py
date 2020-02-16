@@ -18,6 +18,22 @@ class LetsGoo:
         self._service = _service
 
 
+    def upload_file(self, filename):
+        pathfile = f'{os.getcwd()}\{filename}'
+        self._driver.get('https://emas.telkom.co.id/DAVA/bulkOperation/bulkOprRequest_ctrl/')
+        self._driver.find_elements_by_class_name("select2-selection")[0].click()
+        time.sleep(2)
+        self._driver.find_elements_by_css_selector("li.select2-results__option")[1].click()
+        time.sleep(5)
+        self._driver.find_elements_by_class_name("select2-selection")[1].click()
+        time.sleep(2)
+        self._driver.find_elements_by_css_selector("li.select2-results__option")[1].click()
+        time.sleep(2)
+        self._driver.find_element_by_name("file").send_keys(pathfile)
+        time.sleep(2)
+        self._driver.find_elements_by_class_name("btn-warning")[1].click()
+        time.sleep(1)
+
     def createfile(self, length_services, splitstring1, splitstring2, final_odp):
         today = datetime.now()
         strname = today.strftime("%Y%m%d%H%M%S")
@@ -34,6 +50,8 @@ class LetsGoo:
                     thewriter.writerow([f'{splitstring1}',f'0{self._service}',f'{final_odp}',f'{final_odp}-{self._port}'])
                 else:
                     thewriter.writerow([f'{splitstring1}',f'{self._service}',f'{final_odp}',f'{final_odp}-{self._port}'])
+        time.sleep(3)
+        self.upload_file(filename)
         
 
 
