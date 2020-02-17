@@ -34,22 +34,24 @@ class LetsGoo:
         self._driver.find_elements_by_class_name("btn-warning")[1].click()
         time.sleep(1)
 
-    def createfile(self, length_services, splitstring1, splitstring2, final_odp):
+    def createfile(self, length_services, splitstring1, splitstring2, final_odp, panelport):
         today = datetime.now()
         strname = today.strftime("%Y%m%d%H%M%S")
         filename = f'data\RFS_UPDATESTP_{strname}.csv'
+        if len(panelport) != 0:
+            wtfport = panelport
+        else:
+            wtfport = final_odp
         with open(filename, 'w', newline='') as f:
-            thewriter = csv.writer(f, delimiter='|') #without quotes
-            #f.write('"SERVICE_NAME|SERVICE_NUMBER|ODP_PANEL|PORT_NAME   "\n') #quotes per line
-            #thewriter = csv.writer(f, quotechar='"', delimiter='|', quoting=csv.QUOTE_ALL, skipinitialspace=True) #quotes per cloumn
+            thewriter = csv.writer(f, delimiter='|')
             thewriter.writerow(['SERVICE_NAME','SERVICE_NUMBER','ODP_PANEL','PORT_NAME'])
             if len(length_services) == 2:
-                thewriter.writerow([f'{splitstring2}, {splitstring1}',f'{self._service}',f'{final_odp}',f'{final_odp}-{self._port}'])
+                thewriter.writerow([f'{splitstring2}, {splitstring1}',f'{self._service}',f'{final_odp}',f'{wtfport}-{self._port}'])
             elif len(length_services) == 1:
                 if self._service[0] == '3':
-                    thewriter.writerow([f'{splitstring1}',f'0{self._service}',f'{final_odp}',f'{final_odp}-{self._port}'])
+                    thewriter.writerow([f'{splitstring1}',f'0{self._service}',f'{final_odp}',f'{wtfport}-{self._port}'])
                 else:
-                    thewriter.writerow([f'{splitstring1}',f'{self._service}',f'{final_odp}',f'{final_odp}-{self._port}'])
+                    thewriter.writerow([f'{splitstring1}',f'{self._service}',f'{final_odp}',f'{wtfport}-{self._port}'])
         time.sleep(3)
         self.upload_file(filename)
         
@@ -91,15 +93,22 @@ class LetsGoo:
             elements = self._driver.find_elements_by_css_selector("td.column_number a")[0].text
             self._driver.find_element_by_link_text(f"{elements}").click()
             time.sleep(1)
-            odp_name = self._driver.find_elements_by_class_name("label")[3]
-            #port = self._driver.find_elements_by_css_selector("td.expand")[0].text
-            #portname = '-'.join(port.split('-')[:-1])
+            final_odp = self._driver.find_elements_by_class_name("label")[3].text
+            port = self._driver.find_elements_by_css_selector("td.expand")[0].text
+            portname = '-'.join(port.split('-')[:-1])
             if elements == "16":
-                txt = odp_name.text
-                final_odp = txt.split('|', 1)[1]
+                final_odp = final_odp.split('|', 1)[0]
+                if final_odp != portname:
+                    panelport = portname
+                else:
+                    panelport = None
             else:
-                final_odp = odp_name.text
-            self.createfile(length_services, splitstring1, splitstring2, final_odp)
+                if final_odp != portname:
+                    panelport = portname
+                else:
+                    panelport = None
+            
+            self.createfile(length_services, splitstring1, splitstring2, final_odp, panelport)
         except:
             pass
         
