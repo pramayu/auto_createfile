@@ -39,9 +39,9 @@ class LetsGoo:
         strname = today.strftime("%Y%m%d%H%M%S")
         filename = f'data\RFS_UPDATESTP_{strname}.csv'
         with open(filename, 'w', newline='') as f:
-            #thewriter = csv.writer(f, delimiter='|') #without quotes
+            thewriter = csv.writer(f, delimiter='|') #without quotes
             #f.write('"SERVICE_NAME|SERVICE_NUMBER|ODP_PANEL|PORT_NAME   "\n') #quotes per line
-            thewriter = csv.writer(f, quotechar='"', delimiter='|', quoting=csv.QUOTE_ALL, skipinitialspace=True) #quotes per cloumn
+            #thewriter = csv.writer(f, quotechar='"', delimiter='|', quoting=csv.QUOTE_ALL, skipinitialspace=True) #quotes per cloumn
             thewriter.writerow(['SERVICE_NAME','SERVICE_NUMBER','ODP_PANEL','PORT_NAME'])
             if len(length_services) == 2:
                 thewriter.writerow([f'{splitstring2}, {splitstring1}',f'{self._service}',f'{final_odp}',f'{final_odp}-{self._port}'])
@@ -90,9 +90,10 @@ class LetsGoo:
             
             elements = self._driver.find_elements_by_css_selector("td.column_number a")[0].text
             self._driver.find_element_by_link_text(f"{elements}").click()
-            # elm = self._driver.find_elements_by_css_selector("td.expand")[0].text
             time.sleep(1)
             odp_name = self._driver.find_elements_by_class_name("label")[3]
+            #port = self._driver.find_elements_by_css_selector("td.expand")[0].text
+            #portname = '-'.join(port.split('-')[:-1])
             if elements == "16":
                 txt = odp_name.text
                 final_odp = txt.split('|', 1)[1]
