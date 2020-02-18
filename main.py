@@ -54,7 +54,7 @@ class LetsGoo:
                 else:
                     thewriter.writerow([f'{splitstring1}',f'{self._service}',f'{final_odp}',f'{wtfport}-{self._port}'])
         time.sleep(3)
-        # self.upload_file(filename)
+        self.upload_file(filename)  
         
 
 
