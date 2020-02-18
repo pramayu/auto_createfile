@@ -42,6 +42,7 @@ class LetsGoo:
             wtfport = panelport
         else:
             wtfport = final_odp
+
         with open(filename, 'w', newline='') as f:
             thewriter = csv.writer(f, delimiter='|')
             thewriter.writerow(['SERVICE_NAME','SERVICE_NUMBER','ODP_PANEL','PORT_NAME'])
@@ -101,12 +102,12 @@ class LetsGoo:
                 if final_odp != portname:
                     panelport = portname
                 else:
-                    panelport = None
+                    panelport = ''
             else:
                 if final_odp != portname:
                     panelport = portname
                 else:
-                    panelport = None
+                    panelport = ''
             
             self.createfile(length_services, splitstring1, splitstring2, final_odp, panelport)
         except:
