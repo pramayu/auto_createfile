@@ -1,3 +1,4 @@
+import os
 import time
 import json
 from tqdm import tqdm
@@ -40,9 +41,12 @@ if option == "1":
     with open('utils\sterserah.json','r') as data_file:
         data = json.load(data_file)
 elif option == "2":
+    pathhasil = os.getcwd()
     dateinput = input("Input tanggal bulk, exp: 18-Feb-2020: ")
     with open('utils\oblkstatus.json','r') as data_file:
         data = json.load(data_file)
+    hasil = open(pathhasil+r'\utils\hasil.txt',"a+")
+
 
 
 # automation code here ...
@@ -87,7 +91,7 @@ if len(email) != 0 and len(password) != 0:
             time.sleep(3)
             loop = tqdm(total = len(data))
             for dataq in data:
-                f_0431 = CheckBulk(driver, dataq['_id'])
+                f_0431 = CheckBulk(driver, hasil, dataq['_id'])
                 f_0431.checkstatus()
                 loop.set_description(f"Latest Service {dataq['_id']}".format(dataq))
                 loop.update(1)
