@@ -20,7 +20,7 @@ class CheckBulk:
 		self._driver.find_element_by_link_text(self._id).click()
 		time.sleep(2)
 		x = self._driver.find_elements_by_css_selector("td a")[10].text
-		z = self._driver.find_elements_by_class_name("column_center")[93].text
-		self._hasil.write(f"{x.split('|')[1]} {z}\n")
+		r = self._driver.find_elements_by_tag_name("td")[94].text
+		self._hasil.write(f"{x.split('|')[1]} {r}\n")
 		time.sleep(1.5)
 		self._driver.find_elements_by_css_selector("div.jarviswidget-ctrls a.jarviswidget-toggle-btn")[1].click()
